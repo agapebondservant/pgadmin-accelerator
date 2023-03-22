@@ -1,0 +1,36 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: pgadmin-tap
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: pgadmin-tap
+spec:
+  image: ${DATA_E2E_REGISTRY_USERNAME}/pgadmin4-base
+  params:
+    - name: clusterBuilder
+      value: full
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "1"
+  env:
+    - name: PGADMIN_DEFAULT_EMAIL
+      value: test@test.com
+    - name: PGADMIN_DEFAULT_PASSWORD
+      value: alwaysbekind
+    #- name: PGADMIN_LISTEN_ADDRESS
+    #  value: 0.0.0.0
+    - name: PGADMIN_LISTEN_PORT
+      value: 8080
+  serviceClaims:
+    - name: db
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ResourceClaim
+        name: greenplum-db-claim
+    - name: db2
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ResourceClaim
+        name: postgres-db-claim

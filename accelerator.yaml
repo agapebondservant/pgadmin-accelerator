@@ -1,0 +1,10 @@
+accelerator:
+  displayName: pgAdmin4 Accelerator
+  description: Template for deploying pgAdmin4 to a Kubernetes cluster or TAP
+  iconUrl: https://upload.wikimedia.org/wikipedia/commons/1/1b/ML_Ops_Venn_Diagram.svg
+  tags:
+  - "database"
+  - "data"
+  - "sql"
+  - "postgres"
+  - "pgadmin"

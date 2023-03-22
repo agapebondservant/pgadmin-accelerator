@@ -1,0 +1,20 @@
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: greenplum-db-claim
+spec:
+  ref:
+    apiVersion: v1
+    kind: Secret
+    name: greenplum-binding-compatible
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: postgres-db-claim
+spec:
+  ref:
+    apiVersion: v1
+    kind: Secret
+    name: postgres-binding-compatible
