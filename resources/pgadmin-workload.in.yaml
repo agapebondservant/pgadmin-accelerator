@@ -6,14 +6,13 @@ metadata:
   labels:
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/part-of: pgadmin-tap
+  annotations:
+    autoscaling.knative.dev/minScale: "1"
 spec:
   image: ${DATA_E2E_REGISTRY_USERNAME}/pgadmin4-base
   params:
     - name: clusterBuilder
       value: full
-    - name: annotations
-      value:
-        autoscaling.knative.dev/minScale: "1"
   env:
     - name: PGADMIN_DEFAULT_EMAIL
       value: test@test.com
