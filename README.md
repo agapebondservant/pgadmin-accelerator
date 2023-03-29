@@ -43,17 +43,17 @@ resources/set-up-service-bindings.sh
 * Deploy pgadmin as a Workload:
 ```
 envsubst < resources/pgadmin-workload.in.yaml > resources/pgadmin-workload.yaml
-tanzu apps workload create pgadmin-main -f resources/pgadmin-workload.yaml --yes -n ${PGADMIN_NAMESPACE}
+tanzu apps workload create pgadmin-tap -f resources/pgadmin-workload.yaml --yes -n ${PGADMIN_NAMESPACE}
 ```
 
 * Tail the logs of the main app:
 ```
-tanzu apps workload tail pgadmin-main -n ${PGADMIN_NAMESPACE} --since 64h
+tanzu apps workload tail pgadmin-tap -n ${PGADMIN_NAMESPACE} --since 64h
 ```
 
 * Once deployment succeeds, get the URL for the main app and launch the app in your browser:
 ```
-tanzu apps workload get pgadmin-main -n ${PGADMIN_NAMESPACE}  #should yield pgadmin-main.default.<your-domain>
+tanzu apps workload get pgadmin-tap -n ${PGADMIN_NAMESPACE}  #should yield pgadmin-tap.default.<your-domain>
 ```
 
 * Access ServiceBindings:
@@ -64,7 +64,7 @@ kubectl exec -it $PGADMIN_POD -n ${PGADMIN_NAMESPACE} -- sh
 
 * To delete the app:
 ```
-tanzu apps workload delete pgadmin-main -n ${PGADMIN_NAMESPACE}  --yes
+tanzu apps workload delete pgadmin-tap -n ${PGADMIN_NAMESPACE}  --yes
 ```
 
 * To delete the workspace:
