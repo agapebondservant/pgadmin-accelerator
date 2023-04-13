@@ -7,3 +7,4 @@ kubectl apply -f resources/pgadmin-serviceclaimsecrets.yaml -n $PGADMIN_NAMESPAC
 kubectl apply -f resources/pgadmin-serviceclaim.yaml -n $PGADMIN_NAMESPACE
 kubectl get resourceclaim greenplum-db-claim -n $PGADMIN_NAMESPACE
 kubectl get resourceclaim postgres-db-claim -n $PGADMIN_NAMESPACE
+kubectl get secrets -n $PGADMIN_NAMESPACE

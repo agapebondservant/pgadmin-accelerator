@@ -23,15 +23,13 @@ tanzu acc create pgadmin --git-repository https://github.com/agapebondservant/pg
 ```
 source .env
 envsubst < tap-rbac.in.yaml > tap-rbac.yaml
-kubectl create ns ${PGADMIN_NAMESPACE} | true
-tanzu secret registry delete registry-credentials -n ${PGADMIN_NAMESPACE} | true
+kubectl create ns ${PGADMIN_NAMESPACE} || true
+tanzu secret registry delete registry-credentials -n ${PGADMIN_NAMESPACE} -y || true
 tanzu secret registry add registry-credentials \
     --username ${DATA_E2E_REGISTRY_USERNAME} --password ${DATA_E2E_REGISTRY_PASSWORD} \
     --server ${DATA_E2E_GIT_SECRETGEN_SERVER} \
-    --export-to-all-namespaces --yes --namespace ${PGADMIN_NAMESPACE} | true
+    --export-to-all-namespaces --yes --namespace ${PGADMIN_NAMESPACE} || true
 kubectl create rolebinding default-admin --clusterrole=admin --serviceaccount=${PGADMIN_NAMESPACE}:default -n ${PGADMIN_NAMESPACE}
-kubectl patch serviceaccount default \
-    -p '{"imagePullSecrets": [{"name": "registry-credentials"},{"name": "tap-registry"}], "secrets": [{"name": "registry-credentials"}]}' -n ${PGADMIN_NAMESPACE}
 kubectl apply -f resources/tap-rbac.yaml -n ${PGADMIN_NAMESPACE}
 kubectl apply -f resources/tap-rbac-1.3.yaml -n ${PGADMIN_NAMESPACE}
 ```

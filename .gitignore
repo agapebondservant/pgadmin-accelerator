@@ -1,3 +1,4 @@
 .env
 tap-rbac.yaml
 pgadmin-workload.yaml
+resources/pgadmin-serviceclaimsecrets.yaml
